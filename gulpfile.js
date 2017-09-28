@@ -8,8 +8,8 @@ var gulp = require('gulp'),
 	pug = require('gulp-pug'),
 	less = require('gulp-less'),
 	pug = require('gulp-pug'),
-	notify = require("gulp-notify"), // Обработчик ошибок
-	lessImport = require('gulp-less-import'), // Ебаный импорт
+	notify = require("gulp-notify"), 						// Уведомления об ошибках
+	lessImport = require('gulp-less-import'), 				// Ебаный импорт
 	browserSync  = require('browser-sync');
 
 // pug to html
@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 gulp.task('pug', function(){
 	return gulp.src('dev/**/*.pug')
 		.pipe(pug({
-			pretty: true // Не сжимает страницу на выходе!
+			pretty: true 									// Не сжимает страницу на выходе!
 		}))
 		.on('error', notify.onError(function(err) {
 			return {
