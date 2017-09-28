@@ -28,7 +28,7 @@ gulp
 │	│
 │	│
 │	└── styles
-│		├── variables.less					# LESS переменные для общего файла со стилями
+│		├── variables.less					# LESS переменные
 │		├── style.less						# Служит для импорта стилей блоков
 │		├── default.less					# Общие стили для проекта
 │		├── tablet-default.less
