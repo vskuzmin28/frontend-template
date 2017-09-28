@@ -16,7 +16,7 @@ gulp
 
 
 ```
-├── dev
+├── 	dev
 │	├── blocks
 │	│	└── blocks-name					# Название блока
 │	│		├── name.pug				# Страница
