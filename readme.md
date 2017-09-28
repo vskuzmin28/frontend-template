@@ -20,10 +20,10 @@ gulp
 ├── dev
 │   ├── blocks
 │   │	└── blocks-name					# Название блока
-│   │		├── name.pug				# Страница
-│   │		├── name.less				# Стили для блока
-│   │		├── tablet-name.less 
-│   │		└── mobile-name.less
+│   │       ├── name.pug				# Страница
+│   │       ├── name.less				# Стили для блока
+│   │       ├── tablet-name.less 
+│   │       └── mobile-name.less
 │   │
 │   │
 │   ├── pages
