@@ -16,6 +16,7 @@ gulp
 
 
 ```
+
 ├── dev
 │	├── blocks
 │	│	└── blocks-name					# Название блока
@@ -35,4 +36,5 @@ gulp
 │		├── default.less				# Общие стили для проекта
 │		├── tablet-default.less
 │		└── mobile-default.less
+
 ```
