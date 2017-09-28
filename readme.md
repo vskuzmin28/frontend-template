@@ -18,7 +18,7 @@ gulp
 ```
 
 ├── dev
-│	├── blocks
+│   ├── blocks
 │	│	└── blocks-name					# Название блока
 │	│		├── name.pug				# Страница
 │	│		├── name.less				# Стили для блока
