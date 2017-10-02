@@ -15,7 +15,6 @@ gulp
 ## Структура проекта
 
 
-```
 
 ├── dev
 │   ├── blocks
@@ -36,5 +35,3 @@ gulp
 │   	├── default.less				# Общие стили для проекта
 │   	├── tablet-default.less
 │   	└── mobile-default.less
-
-```
