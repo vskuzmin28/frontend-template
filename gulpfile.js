@@ -3,11 +3,13 @@
 // variables
 
 var gulp 			= require('gulp'),
-	pug 			= require('gulp-pug'),
+	clean 			= require('gulp-clean'),			// Отчистка билда
+	pug 			= require('gulp-pug'),				
 	less 			= require('gulp-less'),
 	pug 			= require('gulp-pug'),
-	notify 			= require("gulp-notify"), 			// Уведомления об ошибках
-	browserSync 	= require('browser-sync'),
+	notify 			= require("gulp-notify"),			// Уведомления об ошибках
+	autoprefixer 	= require("gulp-autoprefixer"),
+	browserSync 	= require('browser-sync');
 
 // pug to html
 
@@ -66,8 +68,32 @@ gulp.task('watch', ['browser-sync'], function() {
 	gulp.watch('dev/**/*.html', browserSync.reload);
 })
 
+// clean public
+
+gulp.task('pub-clean', function () {
+    return gulp.src('pub', {read: false})
+        .pipe(clean());
+})
 
 // develomnet (watch + browserSync)
 
-gulp.task('dev', ['watch'])
+gulp.task('dev', ['watch', 'pug', 'less'])
+
+// build
+
+gulp.task('build', ['pub-clean', 'pug', 'less'], function() {
+
+    var buildFonts = gulp.src('dev/fonts/*.*')
+    .pipe(gulp.dest('pub'))
+
+    var buildImg = gulp.src('dev/img/**/*.*')
+    .pipe(gulp.dest('pub/img'))
+
+    var buildCss = gulp.src('dev/styles/**/*.css')
+    .pipe(gulp.dest('pub/styles'))
+
+    var buildHtml = gulp.src('dev/**/*.html')
+    .pipe(gulp.dest('pub'))
+
+})
 
