@@ -76,7 +76,7 @@ gulp.task('pub-clean', function () {
         .pipe(clean());
 })
 
-// develomnet (watch + browserSync)
+// developmnet (watch + browserSync)
 
 gulp.task('dev', ['watch', 'pug', 'less'])
 
