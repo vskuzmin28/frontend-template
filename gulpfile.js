@@ -7,7 +7,7 @@ var gulp 			= require('gulp'),
 	pug 			= require('gulp-pug'),				
 	less 			= require('gulp-less'),
 	notify 			= require('gulp-notify'),			// Уведомления об ошибках
-	autoprefixer 	= require('gulp-autoprefixer'),		// автопрефиксы
+	autoprefixer 	= require('gulp-autoprefixer'),		// Автопрефиксы
 	browserSync 	= require('browser-sync');
 
 // pug to html
@@ -15,11 +15,11 @@ var gulp 			= require('gulp'),
 gulp.task('pug', function(){
 	return gulp.src('dev/**/*.pug')
 		.pipe(pug({
-			pretty: true 								// Не сжимает страницу на выходе!
+			pretty: true 								// Не сжимает страницу на выходе
 		}))
 		.on('error', notify.onError(function(err) {
 			return {
-				title: 'Html',
+				title: 'html',
 				message: err.message
 			}
 		}))
@@ -36,7 +36,7 @@ gulp.task('less', function(){
 
 		.on('error', notify.onError(function(err) {
 			return {
-				title: 'Styles',
+				title: 'styles',
 				message: err.message
 			}
 		}))
@@ -51,8 +51,8 @@ gulp.task('browser-sync', function() {
 	browserSync({ 
 		server: true,
 		server: { 
-			baseDir: 'dev', 			// Директория  в которой лежат доступные страницы
-			index: "/pages/index.html" 	// Начальная странице при обращении к localhost
+			baseDir: 'dev', 							// Директория  в которой лежат доступные страницы
+			index: '/pages/index.html'					// Начальная странице при обращении к localhost
 		},
 		notify: false
 	})
@@ -65,9 +65,11 @@ gulp.task('watch', ['browser-sync'], function() {
 	gulp.watch('dev/**/*.less', ['less']);
 	gulp.watch('dev/**/*.css', browserSync.reload);
 	gulp.watch('dev/**/*.html', browserSync.reload);
+	gulp.watch('dev/img/**/*.*', browserSync.reload);
+	gulp.watch('dev/js/*.js', browserSync.reload);
 })
 
-// clean public
+// clean directory pub
 
 gulp.task('pub-clean', function () {
     return gulp.src('pub', {read: false})
@@ -83,7 +85,7 @@ gulp.task('dev', ['watch', 'pug', 'less'])
 gulp.task('build', ['pub-clean', 'pug', 'less'], function() {
 
     var buildFonts = gulp.src('dev/fonts/*.*')
-    .pipe(gulp.dest('pub'))
+    .pipe(gulp.dest('pub/fonts'))
 
     var buildImg = gulp.src('dev/img/**/*.*')
     .pipe(gulp.dest('pub/img'))
