@@ -6,9 +6,8 @@ var gulp 			= require('gulp'),
 	clean 			= require('gulp-clean'),			// Отчистка билда
 	pug 			= require('gulp-pug'),				
 	less 			= require('gulp-less'),
-	pug 			= require('gulp-pug'),
-	notify 			= require("gulp-notify"),			// Уведомления об ошибках
-	autoprefixer 	= require("gulp-autoprefixer"),
+	notify 			= require('gulp-notify'),			// Уведомления об ошибках
+	autoprefixer 	= require('gulp-autoprefixer'),		// автопрефиксы
 	browserSync 	= require('browser-sync');
 
 // pug to html
