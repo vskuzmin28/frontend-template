@@ -91,7 +91,7 @@ gulp.task('build', ['pub-clean', 'pug', 'less'], function() {
     var buildCss = gulp.src('dev/styles/**/*.css')
     .pipe(gulp.dest('pub/styles'))
 
-    var buildHtml = gulp.src('dev/**/*.html')
+    var buildHtml = gulp.src('dev/pages/*.html')
     .pipe(gulp.dest('pub'))
 
 })
