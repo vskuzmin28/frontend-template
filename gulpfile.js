@@ -3,7 +3,7 @@
 // variables
 
 var gulp 			= require('gulp'),
-	clean 			= require('gulp-clean'),			// Отчистка билда
+	del 			= require('del'),				// Отчистка билда
 	pug 			= require('gulp-pug'),				
 	less 			= require('gulp-less'),
 	notify 			= require('gulp-notify'),			// Уведомления об ошибках
@@ -72,8 +72,7 @@ gulp.task('watch', ['browser-sync'], function() {
 // clean directory pub
 
 gulp.task('pub-clean', function () {
-    return gulp.src('pub', {read: false})
-        .pipe(clean());
+    del(['dev/**/*.html', 'dev/**/*.css', 'pub/blocks']);
 })
 
 // developmnet (watch + browserSync)
