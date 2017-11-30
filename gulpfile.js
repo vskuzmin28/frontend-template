@@ -105,7 +105,7 @@ gulp.task('img', function() {
 		.pipe(gulp.dest('dev/img')); 			// Выгружаем в dev
 })
 
-// -- random values 1, 100
+// random values 1, 100 for generate sprite
 
 const getRandomIntInRange = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1) ) + min
