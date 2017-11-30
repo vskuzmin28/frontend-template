@@ -1,29 +1,25 @@
 // normalize
 
-//@import '../styles/normalize.less';
+@import '../styles/normalize.css';
 
 // fonts & variables
 
 @import '../styles/helpers/variables.less';
+
 @import '../styles/helpers/sprite.less';
 @import '../styles/fonts.css';
 
-//@import '../blocks/block-header/header.less';
-//@import '../blocks/block-footer/footer.less';
+// included blocks
 
-@import '../styles/default.less';
+@import '../blocks/block-header/header.less';
 
-
-
-// SETTINGS //
+// general styles //
 
 // animation
 
 a, a:hover, li, img, input, textarea {
 	transition: all 0.5s ease-in-out;
 }
-
-// body
 
 body {
 	cursor: default;
@@ -34,22 +30,17 @@ a {
   cursor: pointer;
 }
 
-p {
-	font: 14px 'tahoma';
-	color: #f00 !important;
-}
-
 .icon-1 {
 	display: inline-block;
-    .sprite(@l-icon-1);
+	.sprite(@l-icon-1);
 }
 
 .icon-2 {
 	display: inline-block;
-    .sprite(@l-icon-2);
+	.sprite(@l-icon-2);
 }
 
 .icon-3 {
 	display: inline-block;
-    .sprite(@l-icon-1);
+	.sprite(@l-icon-1);
 }
