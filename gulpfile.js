@@ -4,12 +4,19 @@
 
 var gulp 			= require('gulp'),
 	del 			= require('del'),					// Отчистка билда
+	
 	pug 			= require('gulp-pug'),				
 	less 			= require('gulp-less'),
-	notify 			= require('gulp-notify'),			// Уведомления об ошибках
 	autoprefixer 	= require('gulp-autoprefixer'),		// Автопрефиксы
+
+	notify 			= require('gulp-notify'),			// Уведомления об ошибках
 	concat 			= require('gulp-concat'),
 	rename			= require('gulp-rename'),
+	
+	imagemin 		= require('gulp-imagemin'),
+	cache 			= require('gulp-cache'),
+	pngquant 		= require('imagemin-pngquant'),
+	
 	browserSync 	= require('browser-sync');
 
 // pug to html
@@ -83,6 +90,19 @@ gulp.task('watch', ['browser-sync'], function() {
 
 gulp.task('pub-del', function () {
     del(['pub']);
+})
+
+// optimize images
+
+gulp.task('img', function() {
+	return gulp.src('dev/img/**/*') 			// Берем все изображения из dev
+		.pipe(cache(imagemin({ 					// Сжимаем их с наилучшими настройками с учетом кеширования
+			interlaced: true,
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		})))
+		.pipe(gulp.dest('dev/img')); 			// Выгружаем в dev
 })
 
 // -- random values 1, 100
