@@ -34,7 +34,7 @@ gulp.task('pug', function(){
 			}
 		}))
 
-		.pipe(gulp.dest('dev'))
+		.pipe(gulp.dest('pub'))
 		.pipe(browserSync.reload({stream: true}))
 })
 
@@ -52,7 +52,7 @@ gulp.task('less', function(){
 			}
 		}))
 
-		.pipe(gulp.dest('dev'))
+		.pipe(gulp.dest('pub'))
 		.pipe(browserSync.reload({stream: true}))
 })
 
@@ -62,16 +62,17 @@ gulp.task('browser-sync', function() {
 	browserSync({ 
 		server: true,
 		server: { 
-			baseDir: 'dev', 							// Директория  в которой лежат доступные страницы
+			baseDir: 'pub', 							// Директория  в которой лежат доступные страницы
 			index: '/pages/index.html'					// Начальная странице при обращении к localhost
 		},
-		notify: false
+		notify: false,
+		open: false
 	})
 })
 
 // optimize css
 
-gulp.task('css-minify', function() {
+gulp.task('css-min', function() {
     return gulp.src(['pub/styles/**/*.css'])
         .pipe(concat('style.min.css')) 					// Собираем их в кучу в новом файле
         .pipe(gulp.dest('pub/styles')) 					// Выгружаем в папку pub/styles
@@ -95,14 +96,14 @@ gulp.task('pub-del', function () {
 // optimize images
 
 gulp.task('img', function() {
-	return gulp.src('dev/img/**/*') 			// Берем все изображения из dev
+	return gulp.src('pub/img/**/*') 			// Берем все изображения из build
 		.pipe(cache(imagemin({ 					// Сжимаем их с наилучшими настройками с учетом кеширования
 			interlaced: true,
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest('dev/img')); 			// Выгружаем в dev
+		.pipe(gulp.dest('pub/img')); 			// Выгружаем в build
 })
 
 // random values 1, 100 for generate sprite
@@ -133,13 +134,31 @@ gulp.task('sprite', ['sprite-clean'], function() {
     spriteData.css.pipe(gulp.dest('dev/styles/helpers')); 						// путь, куда сохраняем стили
 })
 
+
+
+gulp.task('copy', function() {
+
+    var copyCSS = gulp.src('dev/styles/**/*.css')
+    .pipe(gulp.dest('pub/styles'))
+
+    var copyFonts = gulp.src('dev/fonts/*.*')
+    .pipe(gulp.dest('pub/fonts'))
+
+    var copyImg = gulp.src('dev/img/**/*.*')
+    .pipe(gulp.dest('pub/img'))
+
+    var copyJs = gulp.src('dev/js/**/*.js')
+    .pipe(gulp.dest('pub/js'))
+
+})
+
 // dev mode (watch + browserSync)
 
-gulp.task('dev', ['watch', 'pug', 'less'])
+gulp.task('dev', ['watch', 'pug', 'less', 'copy'])
 
 // build mode
 
-gulp.task('build', ['pub-clean', 'pug', 'less'], function() {
+gulp.task('build', ['pub-del', 'pug', 'less'], function() {
 
     var buildFonts = gulp.src('dev/fonts/*.*')
     .pipe(gulp.dest('pub/fonts'))
@@ -147,7 +166,7 @@ gulp.task('build', ['pub-clean', 'pug', 'less'], function() {
     var buildImg = gulp.src('dev/img/**/*.*')
     .pipe(gulp.dest('pub/img'))
 
-    var buildCss = gulp.src('dev/styles/*.css')
+    var buildCss = gulp.src('dev/styles/**/*.css')
     .pipe(gulp.dest('pub/styles'))
 
     var buildHtml = gulp.src('dev/pages/*.html')
