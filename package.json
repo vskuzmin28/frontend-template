@@ -12,6 +12,7 @@
     "gulp-pngquant": "^1.0.12",
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
+    "gulp.spritesmith": "^6.7.0",
     "imagemin-pngquant": "^5.0.1"
   }
 }

@@ -7,6 +7,9 @@
 @import '../styles/helpers/variables.less';
 @import '../styles/fonts.css';
 
+// helpers
+
+@import '../styles/helpers/mixins.less';
 @import '../styles/helpers/sprite.less';
 
 // INCLUDED BLOCKS
@@ -31,6 +34,13 @@
 
 // general styles //
 
+// sprites
+
+.icon-1 {
+	display: inline-block;
+	.sprite(@l-icon-key-5);
+}
+
 // animation
 
 a, a:hover, li, img, input, textarea {
@@ -53,19 +63,4 @@ ul {
 
 }
 
-// sprites
 
-.icon-1 {
-	display: inline-block;
-	.sprite(@l-icon-1);
-}
-
-.icon-2 {
-	display: inline-block;
-	.sprite(@l-icon-2);
-}
-
-.icon-3 {
-	display: inline-block;
-	.sprite(@l-icon-1);
-}

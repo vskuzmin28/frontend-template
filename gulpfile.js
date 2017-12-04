@@ -13,6 +13,7 @@ var gulp 			= require('gulp'),
 	concat 			= require('gulp-concat'),
 	rename			= require('gulp-rename'),
 	
+	spritesmith		= require('gulp.spritesmith'),
 	imagemin 		= require('gulp-imagemin'),
 	cache 			= require('gulp-cache'),
 	pngquant 		= require('imagemin-pngquant'),
@@ -96,45 +97,56 @@ gulp.task('pub-del', function () {
 // optimize images
 
 gulp.task('img', function() {
-	return gulp.src('pub/img/**/*') 			// Берем все изображения из build
+	return gulp.src('dev/img/**/*') 			// Берем все изображения из build
 		.pipe(cache(imagemin({ 					// Сжимаем их с наилучшими настройками с учетом кеширования
 			interlaced: true,
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest('pub/img')); 			// Выгружаем в build
+		.pipe(gulp.dest('dev/img')); 			// Выгружаем в build
 })
 
-// random values 1, 100 for generate sprite
+// Удаление старых файлов
 
-const getRandomIntInRange = (min, max) =>
-	Math.floor(Math.random() * (max - min + 1) ) + min
+gulp.task('sprite-clean', function () {
+
+    del(['dev/img/sprite-*.png']);
+
+})
 
 // create sprite from icons
 
 gulp.task('sprite', ['sprite-clean'], function() {
-	var fileName = 'sprite-' + getRandomIntInRange(1, 100) + '.png';
 
     var spriteData = 
-        gulp.src('dev/img/icons/*.*') 											// путь, откуда берем картинки для спрайта
+        gulp.src('dev/img/icons/*.*') 							// путь, откуда берем картинки для спрайта
             .pipe(spritesmith({
-                imgName: fileName,
+                imgName: 'sprite.png',
                 cssName: 'sprite.less',
-                padding: 2,
+                padding: 8,
                 cssFormat: 'less',
-                algorithm: 'binary-tree', 										// алгоритм, по которому выстраивает изображения
+                algorithm: 'top-down',							// алгоритм, по которому выстраивает изображения
+
+                // retina
+
+        		retinaSrcFilter: ['dev/img/icons/*@2x.png'],
+        		retinaImgName: 'sprite@2x.png',
+        		retinaImgPath: 'img/sprite@2x.png',
+
+        		cssTemplate: 'dev/styles/helpers/retina-sprite.less.template.mustache',
+
                 cssVarMap: function(sprite) {
                     sprite.name = 'l-' + sprite.name
                 },
-                imgPath: '../img/' + fileName,
+                imgPath: '../img/sprite.png',
             }));
 
-    spriteData.img.pipe(gulp.dest('dev/img/')); 								// путь, куда сохраняем картинку
-    spriteData.css.pipe(gulp.dest('dev/styles/helpers')); 						// путь, куда сохраняем стили
+    spriteData.img.pipe(gulp.dest('dev/img/')); 				// путь, куда сохраняем картинку
+    spriteData.css.pipe(gulp.dest('dev/styles/helpers')); 		// путь, куда сохраняем стили
 })
 
-
+// copy
 
 gulp.task('copy', function() {
 
