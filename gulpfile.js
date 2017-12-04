@@ -125,21 +125,22 @@ gulp.task('sprite', ['sprite-clean'], function() {
                 imgName: 'sprite.png',
                 cssName: 'sprite.less',
                 padding: 8,
-                cssFormat: 'less',
+                cssFormat: 'less_retina',
+
+                imgPath: '../img/sprite.png',
+
                 algorithm: 'top-down',							// алгоритм, по которому выстраивает изображения
 
-                // retina
-
-        		retinaSrcFilter: ['dev/img/icons/*@2x.png'],
-        		retinaImgName: 'sprite@2x.png',
-        		retinaImgPath: 'img/sprite@2x.png',
-
-        		cssTemplate: 'dev/styles/helpers/retina-sprite.less.template.mustache',
+        		//cssTemplate: 'dev/styles/helpers/retina-sprite.less.template.mustache',
 
                 cssVarMap: function(sprite) {
                     sprite.name = 'l-' + sprite.name
                 },
-                imgPath: '../img/sprite.png',
+
+        		retinaSrcFilter: ['dev/img/icons/*@2x.png'],
+        		retinaImgName: '../img/sprite-2x.png',                
+                retinaimgPath: '../img/sprite-2x.png'
+
             }));
 
     spriteData.img.pipe(gulp.dest('dev/img/')); 				// путь, куда сохраняем картинку
