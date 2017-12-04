@@ -18,11 +18,9 @@ gulp dev
 ```
 ├── dev
 │   ├── blocks
-│   │	└── blocks-name					# Название блока
-│   │       ├── name.pug				# Страница
-│   │       ├── name.less				# Стили для блока
-│   │       ├── tablet-name.less 
-│   │       └── mobile-name.less
+│   │	└── block-name					# Название блока
+│   │       ├── name.pug				# Разметка блока
+│   │       └── name.less				# Стили блока
 │   │
 │   │
 │   ├── pages
@@ -30,9 +28,6 @@ gulp dev
 │   │
 │   │
 │   └── styles
-│   	├── variables.less				# LESS переменные для общего файла со стилями
-│   	├── style.less					# Служит для импорта стилей блоков
-│   	├── default.less				# Общие стили для проекта
-│   	├── tablet-default.less
-│   	└── mobile-default.less
+│   	├── variables.less				# Переменные для общего файла со стилями
+│   	└── style.less					# Служит для импорта стилей блоков
 ```
