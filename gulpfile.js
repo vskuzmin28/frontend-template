@@ -35,7 +35,7 @@ gulp.task('pug', function(){
 			}
 		}))
 
-		.pipe(gulp.dest('pub'))
+		.pipe(gulp.dest('build'))
 		.pipe(browserSync.reload({stream: true}))
 })
 
@@ -53,7 +53,7 @@ gulp.task('less', function(){
 			}
 		}))
 
-		.pipe(gulp.dest('pub'))
+		.pipe(gulp.dest('build'))
 		.pipe(browserSync.reload({stream: true}))
 })
 
@@ -63,7 +63,7 @@ gulp.task('browser-sync', function() {
 	browserSync({ 
 		server: true,
 		server: { 
-			baseDir: 'pub', 							// Директория  в которой лежат доступные страницы
+			baseDir: 'build', 							// Директория  в которой лежат доступные страницы
 			index: '/pages/index.html'					// Начальная странице при обращении к localhost
 		},
 		notify: false,
@@ -74,9 +74,9 @@ gulp.task('browser-sync', function() {
 // optimize css
 
 gulp.task('css-min', function() {
-    return gulp.src(['pub/styles/**/*.css'])
+    return gulp.src(['build/styles/**/*.css'])
         .pipe(concat('style.min.css')) 					// Собираем их в кучу в новом файле
-        .pipe(gulp.dest('pub/styles')) 					// Выгружаем в папку pub/styles
+        .pipe(gulp.dest('build/styles')) 					// Выгружаем в папку build/styles
 })
 
 // watcher
@@ -88,10 +88,10 @@ gulp.task('watch', ['browser-sync'], function() {
 	gulp.watch('dev/js/**/*.js', browserSync.reload);
 })
 
-// clean directory pub
+// clean directory build
 
-gulp.task('pub-del', function () {
-    del(['pub']);
+gulp.task('build-del', function () {
+    del(['build']);
 })
 
 // optimize images
@@ -152,16 +152,16 @@ gulp.task('sprite', ['sprite-clean'], function() {
 gulp.task('copy', function() {
 
     var copyCSS = gulp.src('dev/styles/**/*.css')
-    .pipe(gulp.dest('pub/styles'))
+    .pipe(gulp.dest('build/styles'))
 
     var copyFonts = gulp.src('dev/fonts/*.*')
-    .pipe(gulp.dest('pub/fonts'))
+    .pipe(gulp.dest('build/fonts'))
 
     var copyImg = gulp.src('dev/img/**/*.*')
-    .pipe(gulp.dest('pub/img'))
+    .pipe(gulp.dest('build/img'))
 
     var copyJs = gulp.src('dev/js/**/*.js')
-    .pipe(gulp.dest('pub/js'))
+    .pipe(gulp.dest('build/js'))
 
 })
 
@@ -171,22 +171,22 @@ gulp.task('dev', ['watch', 'pug', 'less', 'copy'])
 
 // build mode
 
-gulp.task('build', ['pub-del', 'pug', 'less'], function() {
+gulp.task('build', ['build-del', 'pug', 'less'], function() {
 
     var buildFonts = gulp.src('dev/fonts/*.*')
-    .pipe(gulp.dest('pub/fonts'))
+    .pipe(gulp.dest('build/fonts'))
 
     var buildImg = gulp.src('dev/img/**/*.*')
-    .pipe(gulp.dest('pub/img'))
+    .pipe(gulp.dest('build/img'))
 
     var buildCss = gulp.src('dev/styles/**/*.css')
-    .pipe(gulp.dest('pub/styles'))
+    .pipe(gulp.dest('build/styles'))
 
     var buildHtml = gulp.src('dev/pages/*.html')
-    .pipe(gulp.dest('pub'))
+    .pipe(gulp.dest('build'))
 
     var buildJs = gulp.src('dev/js/*.js')
-    .pipe(gulp.dest('pub/js'))
+    .pipe(gulp.dest('build/js'))
 
 })
 
