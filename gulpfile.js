@@ -111,7 +111,8 @@ gulp.task('img', function() {
 
 gulp.task('sprite-clean', function () {
 
-    del(['dev/img/sprite-*.png']);
+    del(['dev/img/sprite.png']);
+    del(['dev/styles/helpers/sprite.less']);
 
 })
 
